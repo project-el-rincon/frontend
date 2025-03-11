@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { getRandomValues } from 'crypto';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   public data: any;
+  
+  public dataIndex = 2;
+  public dataChoose: any;
+
   title = 'test';
   isLoggedIn = true;
   number = 0;
@@ -20,6 +25,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetch();
+    this.dataChoose = this.data[this.dataIndex]
   }
 
   addItem() {
@@ -28,6 +34,11 @@ export class AppComponent implements OnInit {
 
   toggle() {
     this.isLoggedIn = !this.isLoggedIn;
+  }
+
+  chooseRandom() {
+    this.dataIndex = Math.floor(Math.random() * 100);
+    this.dataChoose = this.data[this.dataIndex]
   }
 
   public fetch() {

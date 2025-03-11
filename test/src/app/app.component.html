@@ -9,6 +9,14 @@
 <button class="btn" (click)="addItem()">Add Item</button>
 <h1>Number of all time {{number}}</h1>
 
+<h1>Random Room</h1>
+<button class="btn" (click)="chooseRandom()">Randomize</button>
+<div class="box">
+  <h4>{{dataChoose.id}}</h4>
+  <h4>{{dataChoose.title}}</h4>
+  <h4>{{dataChoose.completed}}</h4>
+</div>
+
 <h1>Fetching stuff</h1>
 <div class="flex">
   @for (stuff of data; track data){
