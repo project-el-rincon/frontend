@@ -4,4 +4,14 @@
     background-color: aquamarine;
     margin: 10px;
     text-align: center;
+    height: 120px;
+    border-radius: 7px;
+    border-style: solid;
+    border: 5px 5px black;
+}
+
+.flex {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
 }
