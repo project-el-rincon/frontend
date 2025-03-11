@@ -1,1 +1,7 @@
 .btn {padding: 5px}
+.box {
+    padding: 15px;
+    background-color: aquamarine;
+    margin: 10px;
+    text-align: center;
+}

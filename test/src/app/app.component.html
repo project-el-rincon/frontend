@@ -10,4 +10,6 @@
 <h1>Number of all time {{number}}</h1>
 
 <h1>Fetching stuff</h1>
-<div>{{data}}</div>
+@for (stuff of data; track data){
+  <div class="box">{{stuff.title}}</div>
+}
