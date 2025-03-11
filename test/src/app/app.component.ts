@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   public fetch() {
     this.http.get('https://jsonplaceholder.typicode.com/todos').subscribe(
       (resp: any) => {
-        this.data = resp;
+        this.data = JSON.stringify(resp);
       }
     );
   }
