@@ -1,0 +1,13 @@
+<h1>{{title}}</h1>
+
+<button class="btn" (click)="toggle()">Toggle Something</button>
+
+@if (isLoggedIn) {
+  <p>Welcome back, Friend!</p>
+}
+
+<button class="btn" (click)="addItem()">Add Item</button>
+<h1>Number of all time {{number}}</h1>
+
+<h1>Fetching stuff</h1>
+<div>{{data}}</div>
