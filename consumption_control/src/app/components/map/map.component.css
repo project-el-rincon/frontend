@@ -1,0 +1,57 @@
+/* src/app/components/floor-map/floor-map.component.scss */
+.floor-map-container {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    
+    .floor-grid {
+      display: grid;
+      grid-gap: 10px;
+      
+      .grid-cell {
+        height: 120px;
+        background-color: #ddd;
+        border-radius: 4px;
+        
+        &.room {
+          background-color: #fff;
+          padding: 10px;
+          cursor: pointer;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          transition: transform 0.2s, box-shadow 0.2s;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          
+          &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+          }
+          
+          .room-name {
+            font-weight: 500;
+            font-size: 1rem;
+          }
+          
+          .room-metrics {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #666;
+          }
+          
+          &.power-low {
+            border-left: 4px solid #4CAF50;
+          }
+          
+          &.power-medium {
+            border-left: 4px solid #FF9800;
+          }
+          
+          &.power-high {
+            border-left: 4px solid #F44336;
+          }
+        }
+      }
+    }
+}

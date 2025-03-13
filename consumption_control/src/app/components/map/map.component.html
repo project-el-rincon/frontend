@@ -1,1 +1,26 @@
-<p>map works!</p>
+<!-- src/app/components/floor-map/floor-map.component.html -->
+<div class="floor-map-container">
+  <div class="floor-grid" [style.grid-template-columns]="'repeat(' + gridCols + ', 1fr)'">
+    <ng-container *ngFor="let row of roomsGrid; let i = index">
+      <ng-container *ngFor="let room of row; let j = index">
+        <div class="grid-cell" *ngIf="!room" [attr.data-row]="i" [attr.data-col]="j"></div>
+        <div class="grid-cell room" 
+             *ngIf="room" 
+             [attr.data-row]="i" 
+             [attr.data-col]="j"
+             [routerLink]="['/rooms', room.id]"
+             [ngClass]="{
+               'power-low': (room?.currentPower ?? 0) < 500,
+               'power-medium': (room?.currentPower ?? 0) >= 500 && (room?.currentPower ?? 0) < 1000,
+               'power-high': (room?.currentPower ?? 0) >= 1000
+             }">
+          <span class="room-name">{{ room.name }}</span>
+          <div class="room-metrics" *ngIf="room.currentPower !== undefined || room.currentTemperature !== undefined">
+            <span *ngIf="room.currentPower !== undefined">{{ room.currentPower }}W</span>
+            <span *ngIf="room.currentTemperature !== undefined">{{ room.currentTemperature }}°C</span>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Floor } from '../../models/floor.model';
 import { FloorService } from '../../services/floor.service';
+import { MapComponent } from '../../components/map/map.component';
+import { RoomCardComponent } from '../../components/room-card/room-card.component';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [MapComponent, RoomCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -30,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   selectFloor(floorId: number): void {
     this.floorService.getFloorById(floorId).subscribe(floor => {
-      this.selectedFloor = floor;
+      this.selectedFloor = floor !;
     });
   }
 }

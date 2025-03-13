@@ -1,31 +1,37 @@
-<!-- src/app/pages/home/home.component.html -->
+<!-- src/app/pages/home/home.component.html (mise à jour) -->
 <div class="home-container">
-    <div class="floor-selection">
-      <h2>Sélection d'étage</h2>
-      <div class="floor-buttons">
-        <div> 
-          *ngFor="let floor of floors"
-          [label]="floor.name"
-          [active]="selectedFloor?.id === floor.id"
-          (click)="selectFloor(floor.id)">
-        </div>
-      </div>
+  <div class="floor-selection">
+    <h2>Sélection d'étage</h2>
+    <div class="floor-buttons">
+      <button *ngFor="let floor of floors"
+              [class.active]="selectedFloor?.id === floor.id"
+              (click)="selectFloor(floor)">
+        {{ floor.name }}
+      </button>
     </div>
-  
-    <div class="floor-map" *ngIf="selectedFloor">
-      <h3>{{ selectFloor.name }}</h3>
+    
+  </div>
+
+  <div class="floor-display" *ngIf="selectedFloor">
+    <h3>{{ selectFloor.name }}</h3>
+    
+    <!-- Afficher la carte de l'étage -->
+    <!-- <app-map [floor]="selectedFloor"></app-map> -->
+    
+    <!-- Afficher une liste des salles comme alternative ou complément -->
+    <div class="rooms-list">
+      <h4>Liste des salles</h4>
       <div class="rooms-grid">
-        <!-- Ici, nous afficherons une carte des salles de l'étage sélectionné -->
-        <!-- Pour l'instant, utilisons une liste temporaire -->
         <div *ngIf="selectedFloor.rooms.length === 0" class="no-rooms">
           <p>Aucune salle disponible pour cet étage.</p>
         </div>
         
-        <!-- <app-room-card 
+        <app-room-card 
           *ngFor="let room of selectedFloor.rooms"
           [room]="room"
-          [routerLink]="['/rooms', room.id]">
-        </app-room-card> -->
+          >
+        </app-room-card>
       </div>
     </div>
   </div>
+</div>

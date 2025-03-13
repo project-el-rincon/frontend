@@ -1,1 +1,24 @@
-<p>room-card works!</p>
+<div class="room-card">
+    <div class="room-header">
+      <h4>{{ room.name }}</h4>
+    </div>
+    
+    <div class="room-metrics" *ngIf="room.currentPower !== undefined || room.currentTemperature !== undefined">
+      <div class="metric" *ngIf="room.currentPower !== undefined">
+        <span class="metric-label">Puissance</span>
+        <span class="metric-value">{{ room.currentPower }} W</span>
+      </div>
+      <div class="metric" *ngIf="room.currentTemperature !== undefined">
+        <span class="metric-label">Température</span>
+        <span class="metric-value">{{ room.currentTemperature }}°C</span>
+      </div>
+    </div>
+    
+    <div class="room-status" 
+         [ngClass]="{
+           'status-good': (room?.currentPower ?? 0) < 500,
+           'status-warning': (room?.currentPower ?? 0) >= 500 && (room?.currentPower ?? 0) < 1000,
+           'status-alert': (room?.currentPower ?? 0) >= 1000
+         }">
+    </div>
+  </div>
