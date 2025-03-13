@@ -12,9 +12,9 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
   navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/history', label: 'Historique' },
-    { path: '/statistics', label: 'Statistiques' },
-    { path: '/rooms', label: 'Pièces' },
-    { path: '/challenges', label: 'Défis' }
+    { path: '/rooms', label: 'Rooms' },
+    { path: '/statistics', label: 'Statistics' },
+    { path: '/history', label: 'History' },
+    { path: '/challenge', label: 'Challenges' }
   ];
 }
