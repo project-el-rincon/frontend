@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartType, Chart, registerables } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { RouterModule } from '@angular/router';
+
 
 Chart.register(...registerables);
 
@@ -9,7 +11,7 @@ Chart.register(...registerables);
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.css'],
-  imports: [BaseChartDirective]
+  imports: [BaseChartDirective , RouterModule]
 })
 export class StatisticsComponent implements OnInit {
 
