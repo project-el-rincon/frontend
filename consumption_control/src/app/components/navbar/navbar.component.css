@@ -3,16 +3,24 @@
     position: fixed;
     left: 0;
     top: 0;
-    width: 17%; /* Slightly wider to match the color palette */
+    width: 70px; /* Largeur initiale réduite */
     height: 100%;
     background-color: #E8F5E9; /* 🌿 Light green background */
-    padding: 20px;
+    padding: 20px 15px;
     color: #1B5E20; /* 🌱 Dark green text */
     display: flex;
     flex-direction: column;
     gap: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     z-index: 10;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* La sidebar s'élargit au survol */
+.sidebar:hover {
+    width: 17%;
 }
 
 /* Dashboard logo */
@@ -21,6 +29,12 @@
     font-size: 24px;
     margin-bottom: 20px;
     font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .logo h2 {
+    opacity: 1;
 }
 
 /* Link list */
@@ -34,27 +48,58 @@
     margin-bottom: 15px;
 }
 
-.nav-links a {
+.nav-link {
     color: #1B5E20; /* 🌱 Dark green text */
     text-decoration: none;
     font-size: 18px;
     font-weight: 500;
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 10px 15px;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     background-color: #C8E6C9; /* 🌿 Light green background for each link */
+    overflow: hidden;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
+.material-icons {
+    font-size: 24px;
+    min-width: 24px;
+    transition: transform 0.3s ease;
+}
+
+.link-text {
+    margin-left: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .link-text {
+    opacity: 1;
+}
+
+.nav-link:hover .material-icons {
+    transform: scale(0.9);
+}
+
+.nav-link:hover,
+.nav-link.active {
     background-color: #A5D6A7; /* 🍃 Darker green on hover */
     color: #004D40; /* 🌲 Dark green on hover */
 }
 
+/* Style pour l'icône active */
+.nav-link.active .material-icons {
+    color: #004D40;
+}
+
 /* Content offset to avoid overlapping the sidebar */
 .content {
-    margin-left: 18%; /* Matches the sidebar width */
-    padding: 20px;
-    box-sizing: border-box;
+    margin-left: 90px; /* Marge initiale basée sur la largeur réduite de la navbar */
+    transition: margin-left 0.3s ease;
+}
+
+/* Ajustement du contenu quand la navbar est élargie */
+.sidebar:hover + .content {
+    margin-left: 18%;
 }

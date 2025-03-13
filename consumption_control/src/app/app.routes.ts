@@ -13,6 +13,7 @@ export const routes: Routes = [
     { path: 'statistics', component: StatisticsComponent },
     { path: 'rooms', component: RoomsComponent },
     { path: 'challenge', component: ChallengeComponent },
-    { path: '**', redirectTo: '', pathMatch: 'full' }
+    { path: '**', redirectTo: '', pathMatch: 'full' },
+    { path: 'rooms/:id', component: RoomsComponent }
 ];
 

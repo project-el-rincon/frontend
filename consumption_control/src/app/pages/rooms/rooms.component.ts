@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { SensorDataService } from '../../services/sensor-data.service';
 
@@ -27,8 +27,10 @@ export class RoomsComponent implements OnInit {
   isLoading = true;
   currentTime: string = "";
 
-  constructor(private sensorDataService: SensorDataService) {} // ✅ Injection correcte du service
-
+  constructor(
+    private sensorDataService: SensorDataService,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit(): void {
     this.fetchSensorData();
 

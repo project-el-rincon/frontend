@@ -11,6 +11,5 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()) // ✅ Ajout pour le SSR
-    // provideAnimations() // ✅ Ajout pour les animations
   ]
 };
