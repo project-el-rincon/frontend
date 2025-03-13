@@ -1,1 +1,26 @@
-<p>challenge works!</p>
+<h2>Challenge Dashboard</h2>
+<div *ngIf="challenges.length > 0" class="challenge-list">
+  <div *ngFor="let challenge of challenges" class="challenge-card">
+    <h4>{{ challenge.name }}</h4>
+    <p>🎯 Target: {{ challenge.targetValue }}</p>
+    <p>🚀 Current: {{ challenge.currentValue }}</p>
+
+    <!-- ✅ Barre de progression -->
+    <div class="progress-container">
+      <div 
+        class="progress-bar"
+        [style.width.%]="(challenge.currentValue / challenge.targetValue) * 100"
+        [ngClass]="{'completed': challenge.status === 'completed', 
+                    'failed': challenge.status === 'failed',
+                    'in-progress': challenge.status === 'in-progress'}">
+      </div>
+      <!-- ✅ Emoji de statut -->
+      <span class="status-icon">
+        {{ challenge.status === 'completed' ? '✅' :
+           challenge.status === 'failed' ? '❌' : '⌛' }}
+      </span>
+    </div>
+
+    <p>Status: {{ challenge.status }}</p>
+  </div>
+</div>

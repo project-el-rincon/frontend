@@ -1,0 +1,63 @@
+.challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .challenge-card {
+    background-color: #e8f5e9; /* 🌿 Fond vert clair */
+    padding: 15px;
+    border: 1px solid #c8e6c9;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .challenge-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  /* ✅ Barre de progression */
+  .progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .progress-bar {
+    height: 12px;
+    width: 80%; 
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  
+  /* ✅ Statuts spécifiques */
+  .progress-bar.completed {
+    background-color: #a5d6a7; /* ✅ Vert clair */
+  }
+  
+  .progress-bar.failed {
+    background-color: #ffcdd2; /* ❌ Rouge clair */
+  }
+  
+  .progress-bar.in-progress {
+    background-color: #ffeb3b; /* ⌛ Jaune */
+  }
+  
+  /* ✅ Emoji de statut */
+  .status-icon {
+    font-size: 18px;
+  }
+  
+  /* ✅ Titre et texte */
+  h4 {
+    margin-bottom: 5px;
+    color: #2e7d32;
+  }
+  
+  p {
+    color: #1b5e20;
+    margin-bottom: 5px;
+  }
+  

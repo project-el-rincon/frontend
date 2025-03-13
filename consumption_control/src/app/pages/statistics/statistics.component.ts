@@ -48,8 +48,7 @@ export class StatisticsComponent implements OnInit {
   };
 
   // ✅ Utiliser 'ChartType' directement comme type
-  public lineChartType: ChartType = 'bar'; // ✅ Correct
-  // ou 'line
+  public lineChartType: ChartType = 'line'; // ✅ Correct
 
   constructor() {}
 
