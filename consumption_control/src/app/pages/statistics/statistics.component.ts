@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartConfiguration, ChartType, Chart, registerables } from 'chart.js';
+import { ChartConfiguration, ChartType, Chart, registerables, ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { RouterModule } from '@angular/router';
 
@@ -15,21 +15,34 @@ Chart.register(...registerables);
 })
 export class StatisticsComponent implements OnInit {
 
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
+  public pieChartLabels: string[] = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  public pieChartData: ChartData<'pie'> = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
     datasets: [
       {
-        label: 'Energy Consumption (kW)',
-        data: [20, 35, 40, 32, 50, 45, 60], // ➡️ Exemple de données
-        borderColor: '#1B5E20', // 🌱 Dark green
-        backgroundColor: 'rgba(76,175,80,0.2)', // 🌿 Light green
-        pointBackgroundColor: '#2E7D32',
-        pointBorderColor: '#2E7D32',
-        fill: true,
-        tension: 0.4
+        data: [30, 50, 40, 60, 70, 45], // Example data
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
       }
     ]
   };
+  
+
+  public pieChartType: ChartType = 'pie';
+
+  public pieChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      }
+    }
+  };
+  
 
   public lineChartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
@@ -49,8 +62,19 @@ export class StatisticsComponent implements OnInit {
     }
   };
 
-  // ✅ Utiliser 'ChartType' directement comme type
-  public lineChartType: ChartType = 'line'; // ✅ Correct
+  public lineChartData: ChartData<'line'> = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [
+      {
+        label: 'Energy Consumption (kW)',
+        data: [30, 50, 40, 60, 70, 45], // Example values for each month
+        borderColor: '#1B5E20',
+        backgroundColor: 'rgba(76,175,80,0.2)',
+        tension: 0.4,
+      }
+    ]
+  };
+  
 
   constructor() {}
 

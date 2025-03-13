@@ -17,3 +17,41 @@
     <p><strong>Time:</strong> {{ data.timestamp }}</p>
   </div>
 </div>
+
+
+<div class="room-card" *ngFor="let room of rooms">
+  <h3>{{ room.name }}</h3>
+
+  <!-- Energy Gauge -->
+  <div class="gauge-container">
+    <ngx-gauge
+      [value]="room.energy"
+      [label]="'Energy (kW)'"
+      [min]="0"
+      [max]="10"
+      [type]="'arch'"
+      [cap]="'round'"
+      [size]="150"
+      [thick]="10"
+      [append]="' kW'"
+      [foregroundColor]="'rgba(20,205,80,0.5)'"
+      [backgroundColor]="'#E0E0E0'">
+    </ngx-gauge>
+  </div>
+
+  <!-- Temperature Thermometer -->
+<!-- Temperature Thermometer -->
+<div class="thermometer-container">
+  <svg width="70" height="65" viewBox="00 10 50 210">
+    <rect x="20" y="10" width="10" height="180" fill="#E0E0E0" stroke="black" stroke-width="2"></rect>
+    <rect x="20" [attr.y]="200 - (room.temperature * 4)" width="10" [attr.height]="room.temperature * 4" fill="red"></rect>
+    <circle cx="25" cy="190" r="15" fill="red" stroke="black" stroke-width="2"></circle>
+  </svg>
+  <p>{{ room.temperature }} °C</p>
+</div>
+
+
+  <!-- Time Clock -->
+<!-- Time Clock -->
+
+</div>

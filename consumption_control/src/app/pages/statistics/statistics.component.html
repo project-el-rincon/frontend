@@ -10,4 +10,18 @@
       </canvas>
     </div>
   </div>
+
+  <h2>Monthly Consumption Comparison</h2>
+
+  <div class="chart-container">
+    <div style="display: block; width: 350px; height: 400px;">
+      <canvas
+      baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [type]="pieChartType"
+        [options]="pieChartOptions">
+      </canvas>
+    </div>
+  </div>
   

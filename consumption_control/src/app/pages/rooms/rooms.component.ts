@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SensorDataService } from '../../services/sensor-data.service';
 import { RouterModule } from '@angular/router';
-/* import { GaugeChartComponent } from '../../components/gauge-chart/gauge-chart.component'; */
-
-
+import { NgxGaugeModule } from 'ngx-gauge';  // ✅ Import ngx-gauge
+import { SensorDataService } from '../../services/sensor-data.service';
 
 interface SensorData {
   id: number;
@@ -22,18 +20,32 @@ interface SensorData {
   standalone: true,
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
-  imports: [CommonModule, RouterModule, /* GaugeChartComponent */]
+  imports: [CommonModule, RouterModule, NgxGaugeModule] // ✅ Ajout du module ici
 })
 export class RoomsComponent implements OnInit {
   sensorData: SensorData[] = [];
   isLoading = true;
 
-  constructor(private sensorDataService: SensorDataService) {}
+  rooms = [
+    { name: "Room 1", energy: 4.2, temperature: 29.5, time: new Date() },
+    { name: "Room 2", energy: 3.1, temperature: 21, time: new Date() }
+  ];
+
+  currentTime: string = "";
+  sensorDataService: any;
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.sensorDataService.getMockSensorData().subscribe(data => {
+    this.sensorDataService.getMockSensorData().subscribe((data: SensorData[]) => {
       this.sensorData = data;
       this.isLoading = false;
     });
+  
+    // ✅ Mettre à jour l'heure toutes les secondes
+    setInterval(() => {
+      this.currentTime = new Date().toLocaleTimeString();
+    }, 1000);
   }
+  
 }
