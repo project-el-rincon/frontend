@@ -1,7 +1,7 @@
 /* src/app/pages/home/home.component.scss */
 .content {
-  margin-left: 18%; /* Pour laisser de la place à la sidebar */
-  width: 82%;
+  margin-left: 5%; /* Pour laisser de la place à la sidebar */
+  width: 90%;
   min-height: 100vh;
   background-color: #f9f9f9;
 }
