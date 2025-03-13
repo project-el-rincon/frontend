@@ -3,12 +3,13 @@ import { Floor } from '../../models/floor.model';
 import { FloorService } from '../../services/floor.service';
 import { MapComponent } from '../../components/map/map.component';
 import { RoomCardComponent } from '../../components/room-card/room-card.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RoomCardComponent, MapComponent, CommonModule],
+  imports: [RoomCardComponent, MapComponent, NavbarComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
