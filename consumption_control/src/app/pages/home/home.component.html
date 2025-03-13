@@ -3,9 +3,9 @@
 <div class="content">
   <div class="home-container">
     <div class="floor-selection">
-      <h2>Sélection d'étage</h2>
+      <h2>Floor selection</h2>
       <div *ngIf="loading" class="loading">
-        Chargement des étages...
+        Loading floors...
       </div>
       <div *ngIf="error" class="error">
         {{ error }}
@@ -23,7 +23,7 @@
       <div class="map-and-list">
         <app-map [floor]="selectedFloor" class="floor-map"></app-map>
         <div class="rooms-list">
-          <h4>Salles de {{ selectedFloor.name }}</h4>
+          <h4>Rooms {{ selectedFloor.name }}</h4>
           <div class="rooms-grid">
             <app-room-card 
               *ngFor="let room of selectedFloor.rooms" 

@@ -7,5 +7,4 @@ export interface Room {
     currentTemperature?: number;
     currentHumidity?: number;
     currentLightLevel?: number;
-    currentOccupancy?: boolean;
 }

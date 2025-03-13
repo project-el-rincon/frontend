@@ -10,13 +10,13 @@ export class FloorService {
   private floors: Floor[] = [
     {
       id: 1,
-      name: 'Rez-de-chaussée',
-      gridRows: 4,
+      name: 'Ground floor',
+      gridRows: 1,
       gridCols: 5,
       rooms: [
         {
           id: 101,
-          name: 'Salle de classe A1',
+          name: 'Room 1',
           row: 0,
           col: 0,
           currentPower: 750,
@@ -24,7 +24,7 @@ export class FloorService {
         },
         {
           id: 102,
-          name: 'Salle de bureau B2',
+          name: 'Room 2',
           row: 0,
           col: 1,
           currentPower: 500,
@@ -32,7 +32,7 @@ export class FloorService {
         },
         {
           id: 103,
-          name: 'Café C3',
+          name: 'Room 3',
           row: 0,
           col: 2,
           currentPower: 400,
@@ -42,13 +42,13 @@ export class FloorService {
     },
     {
       id: 2,
-      name: '1er étage',
-      gridRows: 4,
+      name: '1st floor',
+      gridRows: 1,
       gridCols: 5,
       rooms: [
         {
           id: 201,
-          name: 'Laboratoire L1',
+          name: 'Room 1',
           row: 0,
           col: 0,
           currentPower: 1200,
@@ -56,7 +56,7 @@ export class FloorService {
         },
         {
           id: 202,
-          name: 'Salle informatique I2',
+          name: 'Room 2',
           row: 0,
           col: 1,
           currentPower: 900,
@@ -64,7 +64,7 @@ export class FloorService {
         },
         {
           id: 203,
-          name: 'Bibliothèque B3',
+          name: 'Room 3',
           row: 0,
           col: 2,
           currentPower: 600,
@@ -74,13 +74,13 @@ export class FloorService {
     },
     {
       id: 3,
-      name: '2ème étage',
-      gridRows: 4,
+      name: '2nd floor',
+      gridRows: 1,
       gridCols: 5,
       rooms: [
         {
           id: 301,
-          name: 'Salle de réunion R1',
+          name: 'Room 1',
           row: 0,
           col: 0,
           currentPower: 450,
@@ -88,7 +88,7 @@ export class FloorService {
         },
         {
           id: 302,
-          name: 'Bureau des professeurs P2',
+          name: "Room 2",
           row: 0,
           col: 1,
           currentPower: 350,
@@ -96,7 +96,7 @@ export class FloorService {
         },
         {
           id: 303,
-          name: 'Salle multimédia M3',
+          name: 'Room 3',
           row: 0,
           col: 2,
           currentPower: 800,
