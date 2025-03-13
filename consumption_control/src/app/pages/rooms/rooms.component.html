@@ -2,25 +2,8 @@
 
 <div *ngIf="isLoading">Loading data...</div>
 
-<div *ngIf="!isLoading">
-  <div *ngFor="let data of sensorData" class="sensor-card">
-    <h3>{{ data.room }}</h3>
-    <p>Energy: {{ data.energy }} kW</p>
-    
-    <!-- ✅ Gauge integrated here -->
-    <!-- <app-gauge-chart [value]="data.energy" [maxValue]="10"></app-gauge-chart> -->
-    
-    <p>Temperature: {{ data.temperature }} °C</p>
-    <p>Sound: {{ data.sound }} dB</p>
-    <p>Motion detected: {{ data.motion ? 'Yes' : 'No' }}</p>
-    <p>CO2: {{ data.co2 }} ppm</p>
-    <p><strong>Time:</strong> {{ data.timestamp }}</p>
-  </div>
-</div>
-
-
-<div class="room-card" *ngFor="let room of rooms">
-  <h3>{{ room.name }}</h3>
+<div class="room-card" *ngFor="let room of sensorData">
+  <h3>{{ room.room }}</h3>
 
   <!-- Energy Gauge -->
   <div class="gauge-container">
@@ -40,18 +23,17 @@
   </div>
 
   <!-- Temperature Thermometer -->
-<!-- Temperature Thermometer -->
-<div class="thermometer-container">
-  <svg width="70" height="65" viewBox="00 10 50 210">
-    <rect x="20" y="10" width="10" height="180" fill="#E0E0E0" stroke="black" stroke-width="2"></rect>
-    <rect x="20" [attr.y]="200 - (room.temperature * 4)" width="10" [attr.height]="room.temperature * 4" fill="red"></rect>
-    <circle cx="25" cy="190" r="15" fill="red" stroke="black" stroke-width="2"></circle>
-  </svg>
-  <p>{{ room.temperature }} °C</p>
-</div>
+  <div class="thermometer-container">
+    <svg width="70" height="65" viewBox="00 10 50 210">
+      <rect x="20" y="10" width="10" height="180" fill="#E0E0E0" stroke="black" stroke-width="2"></rect>
+      <rect x="20" [attr.y]="200 - (room.temperature * 4)" width="10" [attr.height]="room.temperature * 4" fill="red"></rect>
+      <circle cx="25" cy="190" r="15" fill="red" stroke="black" stroke-width="2"></circle>
+    </svg>
+    <p>{{ room.temperature }} °C</p>
+  </div>
 
-
-  <!-- Time Clock -->
-<!-- Time Clock -->
-
+  <!-- Time -->
+  <div class="clock-container">
+    <p><strong>Time:</strong> {{ room.timestamp }}</p>
+  </div>
 </div>

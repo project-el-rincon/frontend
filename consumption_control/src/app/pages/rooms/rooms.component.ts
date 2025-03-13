@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NgxGaugeModule } from 'ngx-gauge';  // ✅ Import ngx-gauge
+import { NgxGaugeModule } from 'ngx-gauge';
 import { SensorDataService } from '../../services/sensor-data.service';
 
 interface SensorData {
@@ -20,32 +20,28 @@ interface SensorData {
   standalone: true,
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
-  imports: [CommonModule, RouterModule, NgxGaugeModule] // ✅ Ajout du module ici
+  imports: [CommonModule, RouterModule, NgxGaugeModule] 
 })
 export class RoomsComponent implements OnInit {
   sensorData: SensorData[] = [];
   isLoading = true;
-
-  rooms = [
-    { name: "Room 1", energy: 4.2, temperature: 29.5, time: new Date() },
-    { name: "Room 2", energy: 3.1, temperature: 21, time: new Date() }
-  ];
-
   currentTime: string = "";
-  sensorDataService: any;
 
-  constructor() {}
+  constructor(private sensorDataService: SensorDataService) {} // ✅ Injection correcte du service
 
   ngOnInit(): void {
-    this.sensorDataService.getMockSensorData().subscribe((data: SensorData[]) => {
-      this.sensorData = data;
-      this.isLoading = false;
-    });
-  
+    this.fetchSensorData();
+
     // ✅ Mettre à jour l'heure toutes les secondes
     setInterval(() => {
       this.currentTime = new Date().toLocaleTimeString();
     }, 1000);
   }
-  
+
+  fetchSensorData(): void {
+    this.sensorDataService.getMockSensorData().subscribe((data: SensorData[]) => {
+      this.sensorData = data;
+      this.isLoading = false;
+    });
+  }
 }
