@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Room } from '../../models/room.model';
-import { NgClass } from '@angular/common';
+import { NgClass, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-room-card',
-  imports: [NgClass],
+  imports: [CommonModule, NgClass],
   templateUrl: './room-card.component.html',
   styleUrl: './room-card.component.css'
 })

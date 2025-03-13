@@ -5,11 +5,11 @@
     
     <div class="room-metrics" *ngIf="room.currentPower !== undefined || room.currentTemperature !== undefined">
       <div class="metric" *ngIf="room.currentPower !== undefined">
-        <span class="metric-label">Puissance</span>
+        <span class="metric-label">Power</span>
         <span class="metric-value">{{ room.currentPower }} W</span>
       </div>
       <div class="metric" *ngIf="room.currentTemperature !== undefined">
-        <span class="metric-label">Température</span>
+        <span class="metric-label">Temperature</span>
         <span class="metric-value">{{ room.currentTemperature }}°C</span>
       </div>
     </div>
