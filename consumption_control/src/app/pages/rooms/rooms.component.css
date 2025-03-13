@@ -11,14 +11,170 @@ h1 {
 }
 .room-card {
     border: 1px solid #ddd;
-    padding: 15px;
-    margin: 10px;
+    padding: 20px;
+    margin: 15px auto;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
+    max-width: 900px;
+    background: #ffffff;
+}
+
+/* 📌 Assignation des zones */
+.energy-container { grid-area: energy; }
+.temperature-container { grid-area: temperature; }
+.motion-container { grid-area: motion; }
+.co2-container { grid-area: co2; }
+.sound-container { grid-area: sound; }
+.time-container { grid-area: time; }
+
+/* 📌 Général */
+.sensor-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 📌 Layout principal */
+.sensor-layout {
+    display: grid;
+    grid-template-areas:
+        "energy temperature"
+        "motion sound"
+        "co2 time";
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 15px;
+}
+
   .gauge-container, .thermometer-container, .clock-container {
     text-align: center;
     margin: 10px 0;
+  }
+  /* Sound Level (Progress Bar) */
+.sound-container {
+    margin: 10px 0;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: #3498db;
+  }
+  
+  /* Motion Detection */
+  .motion-container span {
+    font-weight: bold;
+  }
+  
+  .motion-detected {
+    color: green;
+  }
+  
+  .no-motion {
+    color: red;
+  }
+  
+  /* CO2 Indicator */
+  .co2-container {
+    margin: 10px 0;
+  }
+  
+  .co2-indicator {
+    width: 100px;
+    height: 20px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  ngx-gauge {
+    transition: stroke 0.5s ease-in-out; /* Effet fluide sur le changement de couleur */
+  }
+  .sound-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .sound-label {
+    font-size: 18px;
+  }
+  
+  .sound-bar {
+    width: 200px;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .sound-fill {
+    height: 100%;
+    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  }
+
+  .material-symbols-outlined {
+    font-size: 28px; /* Taille de l'icône */
+    color: #1E88E5; /* Bleu */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Effet dynamique au survol */
+  .sound-container:hover .material-symbols-outlined {
+    transform: scale(1.2);
+  }
+  .motion-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .motion-icon {
+    font-size: 24px;
+    color: gray;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .active-motion {
+    color: green;
+    animation: motionEffect 1s infinite alternate;
+  }
+  
+  @keyframes motionEffect {
+    from {
+      transform: translateX(0px);
+    }
+    to {
+      transform: translateX(5px);
+    }
+  }
+  .time-container {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  
+  .time-icon {
+    font-size: 24px;
+    color: #1E88E5;
+    animation: spinClock 10s linear infinite;
+  }
+  
+  @keyframes spinClock {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
   

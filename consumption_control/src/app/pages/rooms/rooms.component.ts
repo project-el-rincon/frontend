@@ -46,4 +46,46 @@ export class RoomsComponent implements OnInit {
       this.isLoading = false;
     });
   }
+  getCO2Color(co2Level: number): string {
+    const minCO2 = 300;  // Seuil bas (bon air)
+    const maxCO2 = 700; // Seuil haut (mauvais air)
+  
+    // Normalisation de la valeur entre 0 et 1
+    let ratio = (co2Level - minCO2) / (maxCO2 - minCO2);
+    ratio = Math.max(0, Math.min(1, ratio)); // Clamp entre 0 et 1
+  
+    // Interpolation des couleurs (HSL : 120° = Vert, 0° = Rouge)
+    const hue = 120 - (120 * ratio); // Passe du vert (120°) au rouge (0°)
+    return `hsl(${hue}, 100%, 50%)`; // Retourne une couleur en HSL
+  }
+  
+  getEnergyGradientColor(energyLevel: number): string {
+    const minEnergy = 0;   // Seuil minimum (basse consommation)
+    const maxEnergy = 10;  // Seuil maximum (haute consommation)
+  
+    // Normalisation entre 0 et 1
+    let ratio = (energyLevel - minEnergy) / (maxEnergy - minEnergy);
+    ratio = Math.max(0, Math.min(1, ratio)); // Clamp pour rester entre 0 et 1
+  
+    // Interpolation HSL (120° = Vert → 0° = Rouge)
+    const hue = 120 - (120 * ratio); // 120° (Vert) → 60° (Jaune) → 0° (Rouge)
+    return `hsl(${hue}, 100%, 50%)`; // Retourne la couleur dynamique
+  }
+
+  getSoundColor(soundLevel: number): string {
+    // Définir les couleurs en fonction de l'intensité du son
+    const minColor = [173, 216, 230]; // Bleu clair (RGB: LightBlue)
+    const maxColor = [0, 0, 139]; // Bleu foncé (RGB: DarkBlue)
+  
+    // Calcul de l'interpolation (valeur normalisée entre 0 et 1)
+    const ratio = Math.min(soundLevel / 100, 1);
+  
+    // Générer la couleur interpolée
+    const interpolatedColor = minColor.map((min, index) =>
+      Math.round(min + ratio * (maxColor[index] - min))
+    );
+  
+    return `rgb(${interpolatedColor.join(",")})`;
+  }
+  
 }

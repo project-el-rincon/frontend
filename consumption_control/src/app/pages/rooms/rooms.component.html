@@ -5,35 +5,65 @@
 <div class="room-card" *ngFor="let room of sensorData">
   <h3>{{ room.room }}</h3>
 
-  <!-- Energy Gauge -->
-  <div class="gauge-container">
-    <ngx-gauge
-      [value]="room.energy"
-      [label]="'Energy (kW)'"
-      [min]="0"
-      [max]="10"
-      [type]="'arch'"
-      [cap]="'round'"
-      [size]="150"
-      [thick]="10"
-      [append]="' kW'"
-      [foregroundColor]="'rgba(20,205,80,0.5)'"
-      [backgroundColor]="'#E0E0E0'">
-    </ngx-gauge>
-  </div>
+  <div class="sensor-layout">
+    
+    <!-- 🎛️ Energy Gauge (en haut à gauche) -->
+    <div class="sensor-item energy-container">
+      <ngx-gauge
+        [value]="room.energy"
+        [label]="'Energy (kW)'"
+        [min]="0"
+        [max]="10"
+        [type]="'arch'"
+        [cap]="'round'"
+        [size]="150"
+        [thick]="10"
+        [append]="' kW'"
+        [foregroundColor]="getEnergyGradientColor(room.energy)"
+        [backgroundColor]="'#E0E0E0'">
+      </ngx-gauge>
+    </div>
 
-  <!-- Temperature Thermometer -->
-  <div class="thermometer-container">
-    <svg width="70" height="65" viewBox="00 10 50 210">
-      <rect x="20" y="10" width="10" height="180" fill="#E0E0E0" stroke="black" stroke-width="2"></rect>
-      <rect x="20" [attr.y]="200 - (room.temperature * 4)" width="10" [attr.height]="room.temperature * 4" fill="red"></rect>
-      <circle cx="25" cy="190" r="15" fill="red" stroke="black" stroke-width="2"></circle>
-    </svg>
-    <p>{{ room.temperature }} °C</p>
-  </div>
+    <!-- 🌡️ Temperature (en haut à droite) -->
+    <div class="sensor-item temperature-container">
+      <svg width="70" height="65" viewBox="00 10 50 210">
+        <rect x="20" y="10" width="10" height="180" fill="#E0E0E0" stroke="black" stroke-width="2"></rect>
+        <rect x="20" [attr.y]="200 - (room.temperature * 4)" width="10" [attr.height]="room.temperature * 4" fill="red"></rect>
+        <circle cx="25" cy="190" r="15" fill="red" stroke="black" stroke-width="2"></circle>
+      </svg>
+      <p>{{ room.temperature }} °C</p>
+    </div>
 
-  <!-- Time -->
-  <div class="clock-container">
-    <p><strong>Time:</strong> {{ room.timestamp }}</p>
+    <!-- 🚶 Motion Detection (en bas à gauche) -->
+    <div class="sensor-item motion-container">
+      <span class="material-symbols-outlined motion-icon" [ngClass]="{'active-motion': room.motion}">
+        directions_run
+      </span>
+      <strong>Motion Detected:</strong>
+      <span [ngStyle]="{'color': room.motion ? 'green' : 'red'}">
+        {{ room.motion ? 'Yes' : 'No' }}
+      </span>
+    </div>
+        <!-- 🔊 Sound Level (en bas à droite) -->
+        <div class="sensor-item sound-container">
+          <span class="material-symbols-outlined">volume_up</span>
+          <span class="sound-label"><strong>Sound Level:</strong> {{ room.sound }} dB</span>
+          <div class="sound-bar">
+            <div class="sound-fill" [ngStyle]="{'width': room.sound + '%', 'background': getSoundColor(room.sound)}"></div>
+          </div>
+        </div>
+
+    <!-- 🌫️ CO₂ Level (en bas à gauche) -->
+    <div class="sensor-item/ co2-container">
+      <p><strong>CO₂ Level:</strong> {{ room.co2 }} ppm</p>
+      <div class="co2-indicator" [style.backgroundColor]="getCO2Color(room.co2)"></div>
+    </div>
+
+    <!-- 🕒 Time (en bas à droite) -->
+    <div class="sensor-item time-container">
+      <span class="material-symbols-outlined time-icon">schedule</span>
+      <strong>Time:</strong> {{ room.timestamp }}
+    </div>
+
   </div>
 </div>
