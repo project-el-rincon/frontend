@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-gauge-chart',
   standalone: true,
@@ -11,7 +12,6 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./gauge-chart.component.css']
 })
 export class GaugeChartComponent implements OnInit {
-
   @Input() value = 0;
   @Input() maxValue = 10;
 
@@ -21,43 +21,26 @@ export class GaugeChartComponent implements OnInit {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
+  get chartData() {
+    return {
+      labels: ['Consommé', 'Restant'],
+      datasets: [
+        {
+          data: [this.value, this.maxValue - this.value],
+          backgroundColor: ['#ff6384', '#e0e0e0']
+        }
+      ]
+    };
+  }
+
   ngOnInit(): void {
-    if (this.isBrowser) {
-      this.loadChart();
-    } else {
+    if (!this.isBrowser) {
       console.log("Chart.js ne fonctionne que côté client");
     }
-  }
 
-  async loadChart() {
-    // Import dynamique de Chart.js uniquement côté client
-    const { Chart, registerables } = await import('chart.js');
-    Chart.register(...registerables);
-
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        new Chart(ctx, {
-          type: 'doughnut',
-          data: {
-            labels: ['Consommé', 'Restant'],
-            datasets: [
-              {
-                data: [this.value, this.maxValue - this.value],
-                backgroundColor: ['#ff6384', '#e0e0e0']
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            cutout: '80%',
-            plugins: {
-              legend: { display: false }
-            }
-          }
-        });
-      }
-    }
+    setTimeout(() => {
+      this.isBrowser = true;
+    }, 100); // ✅ Ajout d'un léger délai pour forcer la détection côté client
   }
+  
 }

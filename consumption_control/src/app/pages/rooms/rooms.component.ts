@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SensorDataService } from '../../services/sensor-data.service';
 import { RouterModule } from '@angular/router';
-import { GaugeChartComponent } from '../../components/gauge-chart/gauge-chart.component';
+/* import { GaugeChartComponent } from '../../components/gauge-chart/gauge-chart.component'; */
+
 
 
 interface SensorData {
@@ -21,7 +22,7 @@ interface SensorData {
   standalone: true,
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
-  imports: [CommonModule, RouterModule, GaugeChartComponent]
+  imports: [CommonModule, RouterModule, /* GaugeChartComponent */]
 })
 export class RoomsComponent implements OnInit {
   sensorData: SensorData[] = [];

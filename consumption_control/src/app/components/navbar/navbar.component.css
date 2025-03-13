@@ -1,17 +1,60 @@
-nav {
+/* General sidebar style */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 17%; /* Slightly wider to match the color palette */
+    height: 100%;
+    background-color: #E8F5E9; /* 🌿 Light green background */
+    padding: 20px;
+    color: #1B5E20; /* 🌱 Dark green text */
     display: flex;
+    flex-direction: column;
     gap: 20px;
-    background-color: #f0f0f0;
-    padding: 10px;
-}
-nav a {
-    text-decoration: none;
-    color: #333;
-    padding: 5px 10px;
-    border-radius: 4px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    z-index: 10;
 }
 
-nav a.active {
-    background-color: #007bff;
-    color: white;
+/* Dashboard logo */
+.logo h2 {
+    color: #2E7D32; /* 🌿 Medium green */
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Link list */
+.nav-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    margin-bottom: 15px;
+}
+
+.nav-links a {
+    color: #1B5E20; /* 🌱 Dark green text */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    background-color: #C8E6C9; /* 🌿 Light green background for each link */
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: #A5D6A7; /* 🍃 Darker green on hover */
+    color: #004D40; /* 🌲 Dark green on hover */
+}
+
+/* Content offset to avoid overlapping the sidebar */
+.content {
+    margin-left: 18%; /* Matches the sidebar width */
+    padding: 20px;
+    box-sizing: border-box;
 }

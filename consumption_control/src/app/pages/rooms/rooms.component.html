@@ -1,19 +1,19 @@
-<h1>Informations des Capteurs</h1>
+<h1>Sensor Information</h1>
 
-<div *ngIf="isLoading">Chargement des données...</div>
+<div *ngIf="isLoading">Loading data...</div>
 
 <div *ngIf="!isLoading">
   <div *ngFor="let data of sensorData" class="sensor-card">
     <h3>{{ data.room }}</h3>
-    <p>Énergie : {{ data.energy }} kW</p>
+    <p>Energy: {{ data.energy }} kW</p>
     
-    <!-- ✅ Jauge intégrée ici -->
-    <app-gauge-chart [value]="data.energy" [maxValue]="10"></app-gauge-chart>
+    <!-- ✅ Gauge integrated here -->
+    <!-- <app-gauge-chart [value]="data.energy" [maxValue]="10"></app-gauge-chart> -->
     
-    <p>Température : {{ data.temperature }} °C</p>
-    <p>Bruit : {{ data.sound }} dB</p>
-    <p>Mouvement détecté : {{ data.motion ? 'Oui' : 'Non' }}</p>
-    <p>CO2 : {{ data.co2 }} ppm</p>
-    <p><strong>Heure :</strong> {{ data.timestamp }}</p>
-</div>
+    <p>Temperature: {{ data.temperature }} °C</p>
+    <p>Sound: {{ data.sound }} dB</p>
+    <p>Motion detected: {{ data.motion ? 'Yes' : 'No' }}</p>
+    <p>CO2: {{ data.co2 }} ppm</p>
+    <p><strong>Time:</strong> {{ data.timestamp }}</p>
+  </div>
 </div>
