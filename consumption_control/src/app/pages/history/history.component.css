@@ -1,38 +1,16 @@
-/* Container styling */
 .history-container {
     padding: 20px;
   }
   
   .chart-wrapper {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    color: #1B5E20;
+    text-align: center;
     margin-bottom: 20px;
-    padding: 15px;
-    background-color: #E8F5E9; /* 🌿 Light green background */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  
-  /* Sensor details */
-  .sensor-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-  
-  .sensor-card {
-    padding: 15px;
-    background-color: #F1F8E9; /* Light green background */
-    border: 1px solid #C8E6C9; /* Light green border */
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .sensor-card h4 {
-    margin-bottom: 8px;
-    color: #1B5E20; /* 🌱 Dark green */
-  }
-  
-  .sensor-card p {
-    margin: 4px 0;
-    color: #388E3C; /* Forest green */
   }
   

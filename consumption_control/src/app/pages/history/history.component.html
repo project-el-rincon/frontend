@@ -1,40 +1,12 @@
 <div class="history-container">
     <h2>Room History Comparison</h2>
-  
-    <!-- Previous Data Chart -->
     <div class="chart-wrapper">
-      <h3>Previous Consumption</h3>
       <canvas
         baseChart
-        [data]="previousChartData"
-        [options]="chartOptions"
-        []="chartType">
+        [data]="historyChartData"
+        [options]="historyChartOptions"
+        >
       </canvas>
-    </div>
-  
-    <!-- Current Data Chart -->
-    <div class="chart-wrapper">
-      <h3>Current Consumption</h3>
-      <canvas
-        baseChart
-        [data]="currentChartData"
-        [options]="chartOptions"
-        []="chartType">
-      </canvas>
-    </div>
-  
-<!-- Table with sensor data
-    <h3>Room Details</h3>
-    <div *ngIf="sensorData.length > 0" class="sensor-list">
-      <div *ngFor="let data of sensorData" class="sensor-card">
-        <h4>{{ data.room }}</h4>
-        <p>Energy: {{ data.energy }} kW</p>
-        <p>Temperature: {{ data.temperature }} °C</p>
-        <p>Sound: {{ data.sound }} dB</p>
-        <p>Motion detected: {{ data.motion ? 'Yes' : 'No' }}</p>
-        <p>CO2: {{ data.co2 }} ppm</p>
-        <p><strong>Time:</strong> {{ data.timestamp }}</p>
-      </div>
     </div>
   </div>
-   -->
+  
