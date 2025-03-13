@@ -3,10 +3,11 @@ import { Floor } from '../../models/floor.model';
 import { Room } from '../../models/room.model';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-map',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, MatTooltipModule],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
@@ -19,11 +20,17 @@ export class MapComponent implements OnChanges{
   gridRows = 4;
   gridCols = 5;
   roomsGrid: (Room | null)[][] = [];
+  clearHighlight: any;
   
-  ngOnChanges(): void {
+  // map.component.ts
+ngOnChanges(): void {
+  if (this.floor) {
+    this.gridRows = this.floor.gridRows;
+    this.gridCols = this.floor.gridCols;
     this.initializeGrid();
     this.placeRoomsOnGrid();
   }
+}
   
   private initializeGrid(): void {
     this.roomsGrid = [];
@@ -36,20 +43,25 @@ export class MapComponent implements OnChanges{
     }
   }
   
-  private placeRoomsOnGrid(): void {
-    // Dans un vrai projet, les positions viendraient du backend
-    // Ici, on place les salles aléatoirement comme exemple
-    if (!this.floor?.rooms?.length) return;
-    
-    let roomIndex = 0;
-    for (let i = 0; i < this.gridRows && roomIndex < this.floor.rooms.length; i++) {
-      for (let j = 0; j < this.gridCols && roomIndex < this.floor.rooms.length; j++) {
-        // On laisse quelques cases vides pour simuler des couloirs
-        if (Math.random() > 0.3) {
-          this.roomsGrid[i][j] = this.floor.rooms[roomIndex++];
-        }
-      }
+  // map.component.ts
+private placeRoomsOnGrid(): void {
+  if (!this.floor?.rooms) return;
+
+  // Réinitialiser la grille
+  this.initializeGrid();
+
+  // Placer les salles selon leurs coordonnées
+  this.floor.rooms.forEach(room => {
+    if (room.row < this.gridRows && room.col < this.gridCols) {
+      this.roomsGrid[room.row][room.col] = room;
     }
-  }
+  });
+}
+
+highlightRoom(roomId: number): void {
+  // Implémentez la logique de surbrillance ici
+  console.log('Hightlight room:', roomId);
+  // Ex: document.querySelector(`[data-room="${roomId}"]`)?.classList.add('highlighted');
+}
 }
 

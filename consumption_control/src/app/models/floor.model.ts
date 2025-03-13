@@ -3,6 +3,7 @@ import { Room } from "./room.model";
 export interface Floor {
     id: number;
     name: string;
-    level: number;
+    gridRows: number; // Ajouter ces propriétés
+    gridCols: number;
     rooms: Room[];
 }

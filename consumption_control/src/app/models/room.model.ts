@@ -1,7 +1,8 @@
 export interface Room {
     id: number;
     name: string;
-    floorId: number;
+    row: number;
+    col: number;
     currentPower?: number;
     currentTemperature?: number;
     currentHumidity?: number;
