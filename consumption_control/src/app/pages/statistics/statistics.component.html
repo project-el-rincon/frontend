@@ -1,27 +1,53 @@
-<div class="statistics">
-    <h2>Energy Consumption Dashboard</h2>
-  
-    <div class="chart-container">
-      <canvas
-        baseChart
-        [data]="lineChartData"
-        [options]="lineChartOptions"
-        >
-      </canvas>
+<div class="statistics-container">
+  <!-- Section des graphiques existants -->
+  <div class="charts-section">
+    <div class="statistics">
+      <h2>Energy Consumption Dashboard</h2>
+      <div class="chart-container">
+        <canvas baseChart [data]="lineChartData" [options]="lineChartOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="pie-chart-section">
+      <h2>Monthly Consumption Comparison</h2>
+      <div class="chart-container">
+        <div style="display: block; width: 350px; height: 400px;">
+          <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [type]="pieChartType" [options]="pieChartOptions">
+          </canvas>
+        </div>
+      </div>
     </div>
   </div>
 
-  <h2>Monthly Consumption Comparison</h2>
-
-  <div class="chart-container">
-    <div style="display: block; width: 350px; height: 400px;">
-      <canvas
-      baseChart
-        [data]="pieChartData"
-        [labels]="pieChartLabels"
-        [type]="pieChartType"
-        [options]="pieChartOptions">
-      </canvas>
+  <!-- Nouvelle section de classement écologique -->
+  <div class="eco-ranking-section">
+    <h2>🌿 Ecological Ranking</h2>
+    <div class="ranking-container">
+      <div class="ranking-card" *ngFor="let room of roomRankings; let i = index" [routerLink]="['/rooms']" [queryParams]="{id: i + 1}">
+        <div class="ranking-position" [ngStyle]="{'background-color': getScoreColor(room.score)}">
+          {{ i + 1 }}
+        </div>
+        <div class="ranking-info">
+          <div class="room-name">{{ room.name }}</div>
+          <div class="metrics">
+            <div class="metric">
+              <span class="label">Energy:</span>
+              <span class="value">{{ room.energyConsumption }} kW</span>
+            </div>
+            <div class="metric">
+              <span class="label">CO₂:</span>
+              <span class="value">{{ room.co2Level }} ppm</span>
+            </div>
+          </div>
+        </div>
+        <div class="trend-indicator" [ngStyle]="{'color': getTrendColor(room.trend)}">
+          <span class="material-symbols-outlined">{{ getTrendIcon(room.trend) }}</span>
+        </div>
+        <div class="eco-score" [ngStyle]="{'background-color': getScoreColor(room.score)}">
+          {{ room.score | number:'1.0-0' }}
+        </div>
+      </div>
     </div>
   </div>
-  
+</div>

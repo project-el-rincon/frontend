@@ -15,7 +15,7 @@ export class FloorService {
       gridCols: 5,
       rooms: [
         {
-          id: 101,
+          id: 1,
           name: 'Room 1',
           row: 0,
           col: 0,
@@ -23,7 +23,7 @@ export class FloorService {
           currentTemperature: 22
         },
         {
-          id: 102,
+          id: 2,
           name: 'Room 2',
           row: 0,
           col: 1,
@@ -31,7 +31,7 @@ export class FloorService {
           currentTemperature: 25
         },
         {
-          id: 103,
+          id: 3,
           name: 'Room 3',
           row: 0,
           col: 2,

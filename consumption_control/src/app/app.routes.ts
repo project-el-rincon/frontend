@@ -11,9 +11,9 @@ export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'history', component: HistoryComponent },
     { path: 'statistics', component: StatisticsComponent },
+    { path: 'rooms/:id', component: RoomsComponent },
     { path: 'rooms', component: RoomsComponent },
     { path: 'challenge', component: ChallengeComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' },
-    { path: 'rooms/:id', component: RoomsComponent }
 ];
 

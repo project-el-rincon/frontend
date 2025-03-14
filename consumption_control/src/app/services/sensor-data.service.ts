@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 
 interface SensorData {
   id: number;
@@ -34,5 +34,19 @@ export class SensorDataService {
 
   getSensorDataFromAPI(apiUrl: string): Observable<SensorData[]> {
     return this.http.get<SensorData[]>(apiUrl);
+  }
+
+  getRoomData(roomId: number): Observable<SensorData> {
+    return this.getMockSensorData().pipe(
+      map(data => {
+        const room = data.find(room => room.id === roomId);
+        if (room) {
+          return room;
+        } else {
+          console.warn(`Room with ID ${roomId} not found. Returning first room.`);
+          return data[0]; // Retourne la première pièce si l'ID n'est pas trouvé
+        }
+      })
+    );
   }
 }

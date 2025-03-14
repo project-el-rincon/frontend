@@ -11,6 +11,7 @@
              [attr.data-row]="i" 
              [attr.data-col]="j"
              [routerLink]="['/rooms', room.id]"
+             (click)="navigateToRoom(room.id)"
              [matTooltip]="room.name + ' - ' + room.currentPower + 'W'"
              (mouseenter)="highlightRoom(room.id)"
              (mouseleave)="clearHighlight()"

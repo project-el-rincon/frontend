@@ -32,9 +32,18 @@ export class RoomsComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.fetchSensorData();
-
-    // ✅ Mettre à jour l'heure toutes les secondes
+    this.route.paramMap.subscribe(params => {
+      const roomId = params.get('id');
+      if (roomId) {
+        // Si un ID de pièce est spécifié, chargez uniquement cette pièce
+        this.fetchRoomData(parseInt(roomId, 10));
+      } else {
+        // Sinon, chargez toutes les pièces
+        this.fetchSensorData();
+      }
+    });
+    
+    // Mettre à jour l'heure toutes les secondes
     setInterval(() => {
       this.currentTime = new Date().toLocaleTimeString();
     }, 1000);
@@ -45,6 +54,23 @@ export class RoomsComponent implements OnInit {
       this.sensorData = data;
       this.isLoading = false;
     });
+  }
+
+  // Ajoutez cette nouvelle méthode ici
+  fetchRoomData(roomId: number): void {
+    this.isLoading = true;
+    console.log('Fetching data for room ID:', roomId);
+    this.sensorDataService.getRoomData(roomId).subscribe(
+      (data: SensorData) => {
+        console.log('Received data:', data);
+        this.sensorData = [data];
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error:', error);
+        this.isLoading = false;
+      }
+    );
   }
   getCO2Color(co2Level: number): string {
     const minCO2 = 300;  // Seuil bas (bon air)

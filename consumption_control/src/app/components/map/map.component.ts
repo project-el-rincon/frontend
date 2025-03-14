@@ -2,7 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { Floor } from '../../models/floor.model';
 import { Room } from '../../models/room.model';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
@@ -14,6 +14,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class MapComponent implements OnChanges{
   @Input() floor!: Floor;
 
+  // Dans la classe du composant
+constructor(private router: Router) {}
+
+navigateToRoom(roomId: number): void {
+  console.log('Navigating to room:', roomId);
+  this.router.navigate(['/rooms', roomId]);
+}
   
   // Ceci est une représentation très simplifiée
   // Dans un vrai projet, on pourrait avoir des coordonnées plus précises pour chaque salle
