@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch()) // ✅ Ajout pour le SSR
-    // provideAnimations() // ✅ Ajout pour les animations
+    provideHttpClient(withFetch()), // Pour le SSR
+    provideAnimations() // Pour les animations (décommentez si nécessaire)
   ]
 };

@@ -15,10 +15,10 @@
     </div>
     
     <div class="room-status" 
-         [ngClass]="{
-           'status-good': (room?.currentPower ?? 0) < 500,
-           'status-warning': (room?.currentPower ?? 0) >= 500 && (room?.currentPower ?? 0) < 1000,
-           'status-alert': (room?.currentPower ?? 0) >= 1000
-         }">
+        [ngClass]="{
+          'status-good': (room.currentPower ?? 0) < 500,
+          'status-warning': (room.currentPower ?? 0) >= 500 && (room.currentPower ?? 0) < 1000,
+          'status-alert': (room.currentPower ?? 0) >= 1000
+        }">
     </div>
   </div>

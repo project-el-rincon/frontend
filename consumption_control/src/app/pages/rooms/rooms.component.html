@@ -9,24 +9,31 @@
     
     <!-- 🎛️ Energy Gauge (en haut à gauche) -->
     <div class="sensor-item energy-container">
-      <ngx-gauge
-        [value]="room.energy"
-        [label]="'Energy (kW)'"
-        [min]="0"
-        [max]="10"
-        [type]="'arch'"
-        [cap]="'round'"
-        [size]="150"
-        [thick]="10"
-        [append]="' kW'"
-        [foregroundColor]="getEnergyGradientColor(room.energy)"
-        [backgroundColor]="'#E0E0E0'">
-      </ngx-gauge>
+      <!-- Utiliser la directive @defer pour charger le composant uniquement côté client -->
+      @defer {
+        <ngx-gauge
+          [value]="room.energy"
+          [label]="'Energy (kW)'"
+          [min]="0"
+          [max]="10"
+          [type]="'arch'"
+          [cap]="'round'"
+          [size]="150"
+          [thick]="10"
+          [append]="' kW'"
+          [foregroundColor]="getEnergyGradientColor(room.energy)"
+          [backgroundColor]="'#E0E0E0'">
+        </ngx-gauge>
+      } @loading {
+        <div>Chargement du graphique...</div>
+      } @placeholder {
+        <div>Préparation de la jauge d'énergie...</div>
+      }
     </div>
 
     <!-- 🌡️ Temperature (en haut à droite) -->
     <div class="sensor-item temperature-container">
-      <svg width="70" height="65" viewBox="00 10 50 210">
+      <svg width="80" height="80" viewBox="00 10 50 210">
         <rect x="20" y="10" width="10" height="180" fill="#E0E0E0" stroke="black" stroke-width="2"></rect>
         <rect x="20" [attr.y]="200 - (room.temperature * 4)" width="10" [attr.height]="room.temperature * 4" fill="red"></rect>
         <circle cx="25" cy="190" r="15" fill="red" stroke="black" stroke-width="2"></circle>

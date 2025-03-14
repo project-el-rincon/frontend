@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgxGaugeModule } from 'ngx-gauge';
@@ -20,11 +21,13 @@ interface SensorData {
   standalone: true,
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
-  imports: [CommonModule, RouterModule, NgxGaugeModule] 
+  imports: [CommonModule, RouterModule, NgxGaugeModule]
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, OnDestroy {
   sensorData: SensorData[] = [];
   isLoading = true;
+  error: string | null = null;
+  private dataSubscription: Subscription | null = null;
   currentTime: string = "";
 
   constructor(private sensorDataService: SensorDataService) {} // ✅ Injection correcte du service
@@ -38,12 +41,40 @@ export class RoomsComponent implements OnInit {
     }, 1000);
   }
 
+
   fetchSensorData(): void {
     this.sensorDataService.getMockSensorData().subscribe((data: SensorData[]) => {
       this.sensorData = data;
       this.isLoading = false;
     });
   }
+
+
+/*   fetchSensorData(): void {
+    this.isLoading = true;
+    this.error = null;
+    
+    this.dataSubscription = this.sensorDataService.getSensorDataWithRefresh()
+      .subscribe({
+        next: (data) => {
+          this.sensorData = data;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          this.error = 'Échec du chargement des données capteur. Veuillez réessayer.';
+          this.isLoading = false;
+          console.error('Erreur de chargement des données capteur:', err);
+        }
+      });
+  } */
+
+
+  ngOnDestroy(): void {
+    if (this.dataSubscription) {
+      this.dataSubscription.unsubscribe();
+    }
+  }
+
   getCO2Color(co2Level: number): string {
     const minCO2 = 300;  // Seuil bas (bon air)
     const maxCO2 = 700; // Seuil haut (mauvais air)
