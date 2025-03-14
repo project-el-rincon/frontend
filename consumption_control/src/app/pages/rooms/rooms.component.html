@@ -1,7 +1,7 @@
 <h1>Sensor Information</h1>
 
 <div *ngIf="isLoading">Loading data...</div>
-
+<div *ngIf="sensorData.length === 0 && !isLoading">No room data available</div>
 <div class="room-card" *ngFor="let room of sensorData">
   <h3>{{ room.room }}</h3>
 

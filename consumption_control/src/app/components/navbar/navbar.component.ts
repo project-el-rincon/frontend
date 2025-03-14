@@ -11,10 +11,10 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/rooms', label: 'Rooms' },
-    { path: '/statistics', label: 'Statistics' },
-    { path: '/history', label: 'History' },
-    { path: '/challenge', label: 'Challenges' }
+    { path: '/', label: 'Home', icon: 'home' },
+    { path: '/rooms', label: 'Rooms', icon: 'meeting_room' },
+    { path: '/statistics', label: 'Statistics', icon: 'bar_chart' },
+    { path: '/history', label: 'History', icon: 'history' },
+    { path: '/challenge', label: 'Challenges', icon: 'emoji_events' }
   ];
 }
