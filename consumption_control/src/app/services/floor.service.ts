@@ -47,24 +47,24 @@ export class FloorService {
       gridCols: 5,
       rooms: [
         {
-          id: 201,
-          name: 'Room 1',
+          id: 4,
+          name: 'Room 4',
           row: 0,
           col: 0,
           currentPower: 1200,
           currentTemperature: 21
         },
         {
-          id: 202,
-          name: 'Room 2',
+          id: 5,
+          name: 'Room 5',
           row: 0,
           col: 1,
           currentPower: 900,
           currentTemperature: 24
         },
         {
-          id: 203,
-          name: 'Room 3',
+          id: 6,
+          name: 'Room 6',
           row: 0,
           col: 2,
           currentPower: 600,
@@ -79,24 +79,24 @@ export class FloorService {
       gridCols: 5,
       rooms: [
         {
-          id: 301,
-          name: 'Room 1',
+          id: 7,
+          name: 'Room 7',
           row: 0,
           col: 0,
           currentPower: 450,
           currentTemperature: 23
         },
         {
-          id: 302,
-          name: "Room 2",
+          id: 8,
+          name: "Room 8",
           row: 0,
           col: 1,
           currentPower: 350,
           currentTemperature: 22
         },
         {
-          id: 303,
-          name: 'Room 3',
+          id: 9,
+          name: 'Room 9',
           row: 0,
           col: 2,
           currentPower: 800,
