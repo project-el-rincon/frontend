@@ -16,9 +16,9 @@
              (mouseenter)="highlightRoom(room.id)"
              (mouseleave)="clearHighlight()"
              [ngClass]="{
-               'power-low': (room?.currentPower ?? 0) < 500,
-               'power-medium': (room?.currentPower ?? 0) >= 500 && (room?.currentPower ?? 0) < 1000,
-               'power-high': (room?.currentPower ?? 0) >= 1000
+               'power-low': (room.currentPower ?? 0) < 500,
+               'power-medium': (room.currentPower ?? 0) >= 500 && (room?.currentPower ?? 0) < 1000,
+               'power-high': (room.currentPower ?? 0) >= 1000
              }">
           <!-- Contenu existant -->
           <span class="room-name">{{ room.name }}</span>

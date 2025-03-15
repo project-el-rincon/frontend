@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
  import { RouterModule, ActivatedRoute } from '@angular/router';
  import { NgxGaugeModule } from 'ngx-gauge';
  import { SensorDataService } from '../../services/sensor-data.service';
+import { Subscription } from 'rxjs';
  
  interface SensorData {
    id: number;
