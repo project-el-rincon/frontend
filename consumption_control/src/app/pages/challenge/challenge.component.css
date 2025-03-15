@@ -1,63 +1,346 @@
+/* Variables de couleur */
+:root {
+  --primary-color: #2E7D32;
+  --primary-light: #4CAF50;
+  --primary-dark: #1B5E20;
+  --success-color: #388E3C;
+  --warning-color: #F9A825;
+  --error-color: #D32F2F;
+  --background-light: #E8F5E9;
+  --text-dark: #1B5E20;
+}
+
+/* Style du dashboard */
+.challenge-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* En-tête avec titre */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-header h2 {
+  color: var(--primary-dark);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.dashboard-header h2::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  background: var(--primary-color);
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Conteneur de statistiques */
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, var(--background-light), white);
+  border-radius: 12px;
+  padding: 15px 25px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  min-width: 160px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Filtres */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background-color: var(--background-light);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: var(--primary-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-btn:hover {
+  background-color: #C8E6C9;
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Liste de challenges */
 .challenge-list {
-    display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* Carte de challenge */
+.challenge-card {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-left: 5px solid transparent;
+}
+
+.challenge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+
+/* Statuts spécifiques */
+.challenge-card.completed {
+  border-left-color: var(--success-color);
+}
+
+.challenge-card.in-progress {
+  border-left-color: var(--warning-color);
+}
+
+.challenge-card.failed {
+  border-left-color: var(--error-color);
+}
+
+/* Badge de statut */
+.status-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  z-index: 2;
+}
+
+/* Contenu de la carte */
+.challenge-content {
+  padding: 20px;
+}
+
+.challenge-header {
+  margin-bottom: 15px;
+}
+
+.challenge-header h4 {
+  color: var(--primary-dark);
+  font-size: 1.3rem;
+  margin: 0 0 5px 0;
+}
+
+.challenge-room {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Valeurs du challenge */
+.challenge-values {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.target-value, .current-value {
+  display: flex;
+  flex-direction: column;
+}
+
+.value-label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.value-number {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+/* Barre de progression */
+.progress-container {
+  margin-bottom: 15px;
+}
+
+.progress-track {
+  height: 12px;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s ease-in-out;
+  position: relative;
+}
+
+.progress-bar.completed {
+  background: linear-gradient(90deg, #81C784, #388E3C);
+}
+
+.progress-bar.failed {
+  background: linear-gradient(90deg, #EF9A9A, #D32F2F);
+}
+
+.progress-bar.in-progress {
+  background: linear-gradient(90deg, #FFE082, #FFA000);
+}
+
+.progress-pulse {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.progress-percentage {
+  text-align: right;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Actions */
+.challenge-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.action-btn.success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.action-btn.fail {
+  background-color: #FFEBEE;
+  color: var(--error-color);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* État vide */
+.no-challenges {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.empty-state {
+  text-align: center;
+  max-width: 400px;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #ccc;
+}
+
+.empty-state h3 {
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .challenge-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-container {
     flex-direction: column;
-    gap: 12px;
-  }
-  
-  .challenge-card {
-    background-color: #e8f5e9; /* 🌿 Fond vert clair */
-    padding: 15px;
-    border: 1px solid #c8e6c9;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  .challenge-card:hover {
-    transform: translateY(-3px);
-  }
-  
-  /* ✅ Barre de progression */
-  .progress-container {
-    display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 10px;
   }
   
-  .progress-bar {
-    height: 12px;
-    width: 80%; 
-    border-radius: 4px;
-    transition: width 0.4s ease;
+  .filter-container {
+    flex-wrap: wrap;
   }
-  
-  /* ✅ Statuts spécifiques */
-  .progress-bar.completed {
-    background-color: #a5d6a7; /* ✅ Vert clair */
-  }
-  
-  .progress-bar.failed {
-    background-color: #ffcdd2; /* ❌ Rouge clair */
-  }
-  
-  .progress-bar.in-progress {
-    background-color: #ffeb3b; /* ⌛ Jaune */
-  }
-  
-  /* ✅ Emoji de statut */
-  .status-icon {
-    font-size: 18px;
-  }
-  
-  /* ✅ Titre et texte */
-  h4 {
-    margin-bottom: 5px;
-    color: #2e7d32;
-  }
-  
-  p {
-    color: #1b5e20;
-    margin-bottom: 5px;
-  }
-  
+}

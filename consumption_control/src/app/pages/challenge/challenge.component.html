@@ -1,26 +1,102 @@
-<h2>Challenge Dashboard</h2>
-<div *ngIf="challenges.length > 0" class="challenge-list">
-  <div *ngFor="let challenge of challenges" class="challenge-card">
-    <h4>{{ challenge.name }}</h4>
-    <p>🎯 Target: {{ challenge.targetValue }}</p>
-    <p>🚀 Current: {{ challenge.currentValue }}</p>
-
-    <!-- ✅ Barre de progression -->
-    <div class="progress-container">
-      <div 
-        class="progress-bar"
-        [style.width.%]="(challenge.currentValue / challenge.targetValue) * 100"
-        [ngClass]="{'completed': challenge.status === 'completed', 
-                    'failed': challenge.status === 'failed',
-                    'in-progress': challenge.status === 'in-progress'}">
+<div class="challenge-dashboard">
+  <!-- En-tête avec statistiques -->
+  <div class="dashboard-header">
+    <h2>Challenge Dashboard</h2>
+    
+    <div class="stats-container">
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-content">
+          <span class="stat-value">{{getCompletedCount()}}</span>
+          <span class="stat-label">Completed</span>
+        </div>
       </div>
-      <!-- ✅ Emoji de statut -->
-      <span class="status-icon">
-        {{ challenge.status === 'completed' ? '✅' :
-           challenge.status === 'failed' ? '❌' : '⌛' }}
-      </span>
+      <div class="stat-card">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-content">
+          <span class="stat-value">{{getInProgressCount()}}</span>
+          <span class="stat-label">In Progress</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">❌</div>
+        <div class="stat-content">
+          <span class="stat-value">{{getFailedCount()}}</span>
+          <span class="stat-label">Failed</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <p>Status: {{ challenge.status }}</p>
+  <!-- Filtres -->
+  <div class="filter-container">
+    <button class="filter-btn" [ngClass]="{'active': activeFilter === 'all'}" (click)="filterChallenges('all')">All Challenges</button>
+    <button class="filter-btn" [ngClass]="{'active': activeFilter === 'in-progress'}" (click)="filterChallenges('in-progress')">In Progress</button>
+    <button class="filter-btn" [ngClass]="{'active': activeFilter === 'completed'}" (click)="filterChallenges('completed')">Completed</button>
+    <button class="filter-btn" [ngClass]="{'active': activeFilter === 'failed'}" (click)="filterChallenges('failed')">Failed</button>
+  </div>
+
+  <!-- Liste des challenges -->
+  <div *ngIf="filteredChallenges.length > 0" class="challenge-list">
+    <div *ngFor="let challenge of filteredChallenges" class="challenge-card" [ngClass]="challenge.status">
+      <!-- Badge de statut -->
+      <div class="status-badge">
+        {{ challenge.status === 'completed' ? '✅' : 
+           challenge.status === 'failed' ? '❌' : '⏳' }}
+      </div>
+      
+      <div class="challenge-content">
+        <!-- Entête du challenge -->
+        <div class="challenge-header">
+          <h4>{{ challenge.name }}</h4>
+          <div class="challenge-room">Room #{{ challenge.roomId }}</div>
+        </div>
+        
+        <!-- Valeurs -->
+        <div class="challenge-values">
+          <div class="target-value">
+            <span class="value-label">Target</span>
+            <span class="value-number">{{ challenge.targetValue }}</span>
+          </div>
+          <div class="current-value">
+            <span class="value-label">Current</span>
+            <span class="value-number">{{ challenge.currentValue }}</span>
+          </div>
+        </div>
+
+        <!-- Barre de progression améliorée -->
+        <div class="progress-container">
+          <div class="progress-track">
+            <div
+              class="progress-bar"
+              [style.width.%]="(challenge.currentValue / challenge.targetValue) * 100"
+              [ngClass]="{'completed': challenge.status === 'completed', 
+                          'failed': challenge.status === 'failed',
+                          'in-progress': challenge.status === 'in-progress'}">
+              <div class="progress-pulse"></div>
+            </div>
+          </div>
+          <div class="progress-percentage">
+            {{ (challenge.currentValue / challenge.targetValue * 100).toFixed(0) }}%
+          </div>
+        </div>
+
+        <!-- Actions (pour les challenges en cours) -->
+        <div class="challenge-actions" *ngIf="challenge.status === 'in-progress'">
+          <button class="action-btn success" (click)="completeChallenge(challenge.id, true)">Complete</button>
+          <button class="action-btn fail" (click)="completeChallenge(challenge.id, false)">Fail</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message si aucun challenge trouvé avec le filtre actuel -->
+  <div *ngIf="filteredChallenges.length === 0" class="no-challenges">
+    <div class="empty-state">
+      <div class="empty-icon">🔍</div>
+      <h3>No challenges found</h3>
+      <p>There are no challenges matching your current filter.</p>
+      <button class="action-btn" (click)="filterChallenges('all')">Show All Challenges</button>
+    </div>
   </div>
 </div>
