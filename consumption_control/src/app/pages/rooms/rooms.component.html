@@ -31,6 +31,99 @@
       }
     </div>
 
+    <!-- 💧 Humidity (Humidité) -->
+<!-- Nouvel affichage pour l'indicateur d'humidité -->
+<!-- Nouvel affichage pour l'indicateur d'humidité avec SVG corrigé -->
+<div class="sensor-item humidity-container">
+  <div class="humidity-icon-container" [ngClass]="{'humidity-high': isHighHumidity(room.humidity)}">
+    <svg class="humidity-drop-icon" width="40" height="40" viewBox="0 0 24 24">
+      <!-- Définition du clipPath en premier -->
+      <defs>
+        <clipPath [attr.id]="'dropClip' + room.id">
+          <path d="M12,2.5c0,0-6.5,7.5-6.5,13S8.67,22,12,22s6.5-1.5,6.5-6.5S12,2.5,12,2.5z"/>
+        </clipPath>
+      </defs>
+      
+      <!-- Contour de la goutte d'eau -->
+      <path class="drop-outline" d="M12,2.5c0,0-6.5,7.5-6.5,13S8.67,22,12,22s6.5-1.5,6.5-6.5S12,2.5,12,2.5z" 
+            fill="none" stroke="#86c5da" stroke-width="1.5"/>
+      
+      <!-- Remplissage de la goutte qui s'adapte selon la valeur d'humidité -->
+      <rect x="5.5" [attr.y]="22 - (room.humidity / 100 * 19.5)" width="13" 
+            [attr.height]="room.humidity / 100 * 19.5" 
+            [attr.fill]="getHumidityColor(room.humidity)" 
+            [attr.clip-path]="'url(#dropClip' + room.id + ')'"/>
+    </svg>
+  </div>
+  <div class="humidity-info">
+    <strong>Humidity:</strong> {{ room.humidity }}%
+    <div class="humidity-bar">
+      <div class="humidity-fill" [ngStyle]="{'width': room.humidity + '%', 'background': getHumidityColor(room.humidity)}"></div>
+    </div>
+  </div>
+</div>
+
+  <!-- 💡 Light (Luminosité) -->
+<!-- Remplacement de l'affichage actuel de Light par un nouveau design -->
+<div class="sensor-item light-container">
+  <!-- Nouvelle icône d'ampoule SVG au lieu de material-symbols -->
+  <div class="light-icon-container">
+    <svg class="light-bulb-icon" width="40" height="40" viewBox="0 0 24 24" [ngStyle]="{'fill': getLightIconColor(room.light)}">
+      <path d="M12,2C8.13,2,5,5.13,5,9c0,2.38,1.19,4.47,3,5.74V17c0,0.55,0.45,1,1,1h6c0.55,0,1-0.45,1-1v-2.26
+        c1.81-1.27,3-3.36,3-5.74C19,5.13,15.87,2,12,2z M14,13.7V16h-4v-2.3C8.48,12.63,7,10.96,7,9c0-2.76,2.24-5,5-5
+        s5,2.24,5,5C17,10.96,15.52,12.63,14,13.7z"/>
+      <path d="M9,20h6v1c0,0.55-0.45,1-1,1h-4c-0.55,0-1-0.45-1-1V20z"/>
+      <!-- Layer pour l'effet de "glow" -->
+      <circle class="light-glow" cx="12" cy="9" r="3" [ngStyle]="{'opacity': getLightGlowOpacity(room.light)}"/>
+    </svg>
+  </div>
+  <div class="light-info">
+    <strong>Light Level:</strong> {{ room.light }} lux
+    <div class="light-bar">
+      <div class="light-fill" [ngStyle]="{'width': getLightPercentage(room.light) + '%', 'background': getLightColor(room.light)}"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 🧪 TVOC (Composés organiques volatils totaux) -->
+<!-- Nouvel affichage pour l'indicateur TVOC avec un récipient qui se remplit -->
+<div class="sensor-item tvoc-container">
+  <div class="tvoc-icon-container" [ngClass]="{'tvoc-high': isHighTvoc(room.tvoc)}">
+    <svg class="tvoc-flask-icon" width="40" height="40" viewBox="0 0 24 24">
+      <!-- Définition du clipPath pour le remplissage -->
+      <defs>
+        <clipPath [attr.id]="'flaskClip' + room.id">
+          <path d="M9,4 v4 c0,0 -4,7 -4,10 c0,3 3,4 7,4 s7,-1 7,-4 c0,-3 -4,-10 -4,-10 v-4 z"/>
+        </clipPath>
+      </defs>
+      
+      <!-- Contour du flacon -->
+      <path class="flask-outline" d="M9,4 v4 c0,0 -4,7 -4,10 c0,3 3,4 7,4 s7,-1 7,-4 c0,-3 -4,-10 -4,-10 v-4 z" 
+            fill="none" stroke="#999999" stroke-width="1.5"/>
+      
+      <!-- Col du flacon -->
+      <rect x="9" y="2" width="6" height="2" rx="1" fill="#999999" />
+      
+      <!-- Remplissage du flacon qui s'adapte selon la valeur TVOC -->
+      <rect x="5" [attr.y]="22 - (room.tvoc / 1000 * 14)" width="14"
+            [attr.height]="room.tvoc / 1000 * 14"
+            [attr.fill]="getTvocColor(room.tvoc)"
+            [attr.clip-path]="'url(#flaskClip' + room.id + ')'"/>
+            
+      <!-- Lignes de mesure sur le flacon -->
+      <line x1="7" y1="18" x2="9" y2="18" stroke="#999999" stroke-width="0.7" />
+      <line x1="7" y1="14" x2="9" y2="14" stroke="#999999" stroke-width="0.7" />
+      <line x1="7" y1="10" x2="9" y2="10" stroke="#999999" stroke-width="0.7" />
+    </svg>
+  </div>
+  <div class="tvoc-info">
+    <strong>TVOC Level:</strong> {{ room.tvoc }} ppb
+    <div class="tvoc-bar">
+      <div class="tvoc-fill" [ngStyle]="{'width': getTvocPercentage(room.tvoc) + '%', 'background': getTvocColor(room.tvoc)}"></div>
+    </div>
+  </div>
+</div>
+
     <!-- 🌡️ Temperature (en haut à droite) -->
     <div class="sensor-item temperature-container">
       <svg width="80" height="80" viewBox="00 10 50 210">

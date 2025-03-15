@@ -26,6 +26,10 @@ h1 {
 .co2-container { grid-area: co2; }
 .sound-container { grid-area: sound; }
 .time-container { grid-area: time; }
+/* Ajoutez ces nouvelles zones à la grille */
+.humidity-container { grid-area: humidity; }
+.light-container { grid-area: light; }
+.tvoc-container { grid-area: tvoc; }
 
 /* 📌 Général */
 .sensor-item {
@@ -39,9 +43,9 @@ h1 {
 .sensor-layout {
     display: grid;
     grid-template-areas:
-        "energy temperature"
-        "motion sound"
-        "co2 time";
+        "energy temperature light"
+        "motion sound humidity"
+        "co2 tvoc time";
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     justify-content: center;
@@ -122,12 +126,141 @@ h1 {
     transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
   }
 
+  /* Styles pour les nouveaux indicateurs */
+.humidity-indicator, .light-indicator, .tvoc-indicator {
+  width: 100px;
+  height: 20px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.humidity-container .material-symbols-outlined,
+.light-container .material-symbols-outlined,
+.tvoc-container .material-symbols-outlined {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+/* Nouveaux styles pour l'indicateur de lumière */
+.light-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.light-icon-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.light-bulb-icon {
+  transition: fill 0.3s ease-in-out;
+}
+
+.light-bulb-icon .light-glow {
+  transition: opacity 0.3s ease-in-out, r 0.3s ease-in-out;
+  fill: #FFD700;
+  filter: blur(3px);
+  mix-blend-mode: screen;
+}
+
+.light-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.light-bar {
+  width: 100%;
+  height: 10px;
+  background: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.light-fill {
+  height: 100%;
+  transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Animation pour l'effet de "pulse" sur l'ampoule lorsque la luminosité est élevée */
+@keyframes lightPulse {
+  0% { filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.7)); }
+  50% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.9)); }
+  100% { filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.7)); }
+}
+
+.light-bulb-high {
+  animation: lightPulse 2s infinite;
+}
+
   .material-symbols-outlined {
     font-size: 28px; /* Taille de l'icône */
     color: #1E88E5; /* Bleu */
     transition: transform 0.3s ease-in-out;
   }
   
+  /* Styles pour l'indicateur d'humidité */
+.humidity-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.humidity-icon-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.humidity-drop-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.humidity-drop-icon:hover {
+  transform: scale(1.1);
+}
+
+.humidity-drop-icon .drop-outline {
+  transition: stroke 0.3s ease-in-out;
+}
+
+.humidity-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.humidity-bar {
+  width: 100%;
+  height: 10px;
+  background: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.humidity-fill {
+  height: 100%;
+  transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Animation subtile pour les niveaux élevés d'humidité */
+@keyframes dropRipple {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+.humidity-high .humidity-drop-icon {
+  animation: dropRipple 2s infinite;
+}
+
   /* Effet dynamique au survol */
   .sound-container:hover .material-symbols-outlined {
     transform: scale(1.2);
@@ -178,3 +311,72 @@ h1 {
     }
   }
   
+  /* Responsive design pour écrans plus petits */
+@media (max-width: 768px) {
+  .sensor-layout {
+      grid-template-areas:
+          "energy temperature"
+          "humidity motion"
+          "sound light"
+          "co2 tvoc"
+          "time time";
+      grid-template-columns: 1fr 1fr;
+  }
+
+  /* Styles pour l'indicateur TVOC */
+.tvoc-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.tvoc-icon-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tvoc-flask-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.tvoc-flask-icon:hover {
+  transform: scale(1.1);
+}
+
+.tvoc-flask-icon .flask-outline {
+  transition: stroke 0.3s ease-in-out;
+}
+
+.tvoc-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.tvoc-bar {
+  width: 100%;
+  height: 10px;
+  background: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.tvoc-fill {
+  height: 100%;
+  transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Animation pour les niveaux élevés de TVOC */
+@keyframes tvocBubble {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); filter: brightness(1.1); }
+  100% { transform: scale(1); }
+}
+
+.tvoc-high .tvoc-flask-icon {
+  animation: tvocBubble 2s infinite;
+}
+}
