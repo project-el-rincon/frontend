@@ -15,9 +15,9 @@ interface SensorData {
   motion: boolean;
   co2: number;
   timestamp: string;
-  humidity?: number;
-  light?: number;
-  tvoc?: number;
+  humidity: number;
+  light: number;
+  tvoc: number;
 }
 
 @Injectable({

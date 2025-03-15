@@ -66,20 +66,20 @@ import { Subscription } from 'rxjs';
  
    // Ajoutez cette nouvelle méthode ici
    fetchRoomData(roomId: number): void {
-     this.isLoading = true;
-     console.log('Fetching data for room ID:', roomId);
-     this.sensorDataService.getRoomData(roomId).subscribe(
-       (data: SensorData) => {
-         console.log('Received data:', data);
-         this.sensorData = [data];
-         this.isLoading = false;
-       },
-       (error) => {
-         console.error('Error:', error);
-         this.isLoading = false;
-       }
-     );
-   }
+    this.isLoading = true;
+    console.log('Fetching data for room ID:', roomId);
+    this.sensorDataService.getRoomData(roomId).subscribe(
+      (data: SensorData) => {
+        console.log('Received data:', data);
+        this.sensorData = [data];
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error:', error);
+        this.isLoading = false;
+      }
+    );
+  }
 
    ngOnDestroy(): void {
     if (this.dataSubscription) {
